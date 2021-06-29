@@ -1,0 +1,74 @@
+﻿@page "/about-me"
+@inherits My.Web.Pages.AboutMeComponent
+
+@using Radzen
+@using Radzen.Blazor
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading class="text-dark-green" Size="H1" Text="About me">
+    </RadzenHeading>
+    <div class="about min768-col">
+      <div class="about-col padd8">
+        <div class="about-col">
+          <RadzenImage
+            Path="https://avatars.githubusercontent.com/u/71005832?s=400&u=8f2c019d0489bec5e19d5ed3529683ec0d235ebe&v=4"
+            class="git-avatar"></RadzenImage>
+        </div>
+        <div class="about text-dark-green">
+          <div class="about-col no-shrink fit padd8">
+            <p class="text-bold">Name:</p>
+            <p class="text-bold">Age:</p>
+            <p class="text-bold">Location:</p>
+            <p class="text-bold">Languages:</p>
+          </div>
+          <div class="about-col no-shrink fit padd8">
+            <p>Rikard Friberg</p>
+            <p>33</p>
+            <p>Kinna, Sweden</p>
+            <ul class="li-padd">
+              <li>C#</li>
+              <li>MsSQL</li>
+              <li>JavaScript</li>
+              <li>Razor</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Kotlin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="about-col padd8">
+        <RadzenCard class="card light-green">
+          Soo... My name is Rikard. I´m a 34 year old computer enthusiast from Sweden. Since I graduated from school
+          I´ve mostly been working in the industry. 9 years of making cardboard boxes and about 5 years in the plastic
+          industry.
+          <br>
+          Computers has always been a substantial part of my life. Since the first computer that entered my parents
+          house in the mid-90s, I´ve been concidered the "digital guru". 
+          <br>
+          <i>-Anyone got problems? Call Rikard!</i>
+          <br>
+          I´ve never been that much into gaming. My main interest has always been understanding how computers and
+          digital communication works. So when internet entered my life in the late 90s, the coolest thing I could
+          imagine was to build my own webpage. I did put a very specific thing on my wish-list for the next christmas.
+          A book about HTML. And about here is where my interest in computers really changed. I read that book from
+          start to finish and memorized almost everything. I was completely convinced that HTML was my future vocation.
+          However... Life took a turn. I was just a child at this point. About 10 yers old I think.
+          <br>
+          After high school I started working in a huge factory, making cardboard boxes. I also bought a house which I
+          started renovating and I just didn´t have the time for computers anymore.
+          <br>
+          For about five years ago, I found an article about developing apps for android using android studio
+          and kotlin. This woke my mind up and i started researching more information about it. I started practicing and
+          was able to develop a couple of neat little apps, which I of course put up on Google Play Store.
+          <br>
+          I had so much fun doing this, and this really got me into coding. When I, a couple of years later found out
+          that there is an education for .NET System Development in Borås, I quickly decided to rearrange my life.
+          <br>
+          And here I am today. Half way through that education with great grades so far. And I am really enjoying it.
+          I´m graduating in June 2022, and then my journey begins.
+        </RadzenCard>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

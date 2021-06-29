@@ -1,0 +1,30 @@
+﻿@page "/"
+@page "/welcome"
+@inherits My.Web.Pages.WelcomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading class="text-dark-green" Size="H1" Text="Welcome">
+    </RadzenHeading>
+    <div class="welcome">
+      <RadzenCard class="card full-width light-green">
+        And thank you for your visit!
+        <br>
+        The purpose with this webpage for now, is to show you who I am and what I am working with. I,m studying System
+        Development at Borås YH. More information about that is in the "About"-section.
+        <br>
+        This is all an on-going, self-educating project. I have built this site as a Blazor Server-side application with
+        SignalR implemented. For the layout-base I´m using Radzen components and upon that, self-written css. The "My
+        Projects"-section i integrated with GitHub API. Feel free to check out the code, running behind this page.
+        <br>
+        I am constantly working on this page when I have some spare time or when I stumble upon some cool features to
+        add. Updates about that and other things that is goning on in my life will be located under "Blog".
+        <br>
+        Feel free to contact me for any questions. There is a "Guestbook"-section where you can reach out. Or use one of
+        the buttons in the top-right corner.
+      </RadzenCard>
+    </div>
+  </ChildContent>
+</RadzenContent>

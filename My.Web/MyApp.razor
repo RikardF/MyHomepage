@@ -1,0 +1,12 @@
+﻿@namespace My.Web
+@using Microsoft.AspNetCore.Mvc
+<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MyLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MyLayout)">
+            <p class="text-dark-green">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

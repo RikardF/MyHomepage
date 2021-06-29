@@ -1,0 +1,31 @@
+@page "/blog"
+@inherits My.Web.Pages.BlogComponent
+
+@using Radzen
+@using Radzen.Blazor
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading class="text-dark-green" Size="H1" Text="Blog">
+    </RadzenHeading>
+    <div class="blog">
+      <div class="blog-column">
+        @foreach (BlogContent blogContent in BlogContents.OrderByDescending(d => d.DateAdded))
+        {
+          <RadzenCard class="card light-green">
+            <div class="blog-title-row">
+              <RadzenHeading class="text-dark-green" Size="H2" Text=@blogContent.Title>
+              </RadzenHeading>
+              <p class="text-dark-green">@blogContent.DateAdded</p>
+            </div>
+            <hr>
+            <div class="text-dark-green">
+              @((MarkupString)blogContent.Content)
+            </div>
+          </RadzenCard>
+          <br>
+          <br>
+        }
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

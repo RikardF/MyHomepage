@@ -1,0 +1,63 @@
+@inherits My.Web.Layouts.MyLayoutComponent
+@using Radzen
+@using Radzen.Blazor
+
+<RadzenHeader>
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-6 d-flex align-items-center">
+        <RadzenSidebarToggle Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel Text="MyHomepage">
+        </RadzenLabel>
+      </div>
+      <div class="col-6 text-right">
+        <a href="https://www.github.com/RikardF/">
+          <i class="fab fa-github text-normal awesome-icon"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rikard-friberg-a583776a/">
+          <i class="fab fa-linkedin text-normal awesome-icon"></i>
+        </a>
+        <a href="mailto:Ri.Frib@gmail.com">
+          <i class="fas fa-at text-normal awesome-icon"></i>
+        </a>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<CascadingValue Value="connectionParams">
+  <RadzenBody class="min768-no-margin-left" @ref="body0">
+    <ChildContent>
+      <RadzenContentContainer Name="main">
+        <RadzenCard class="main-card fade-white padd16">
+          @Body
+        </RadzenCard>
+
+      </RadzenContentContainer>
+    </ChildContent>
+  </RadzenBody>
+</CascadingValue>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Text="Welcome" Path="welcome">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="About me" Path="about-me">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Blog" Path="blog">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="My projects" Path="my-projects">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Guestbook" Path="guestbook">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+  <ChildContent>
+    <RadzenLabel Text="Rikard Friberg, Copyright Ⓒ 2021">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

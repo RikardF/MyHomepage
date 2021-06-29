@@ -1,0 +1,97 @@
+@page "/guestbook"
+@inherits My.Web.Pages.GuestbookComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using System.Net
+<RadzenContent Container="main">
+    <ChildContent>
+        <div>
+            <RadzenHeading class="text-dark-green" Size="H1" Text="Guestbook">
+            </RadzenHeading>
+        </div>
+
+        <div class="guestbook">
+
+
+            @if (!ShowNew)
+            {
+                <div class="guestbook-row">
+                    <RadzenButton class="new-button" Text="Write something" Click=@(() => Show())></RadzenButton>
+
+                </div>
+            }
+            else
+            {
+                <div class="guestbook-row">
+                    <RadzenButton class="new-button display" Text="Awsome!" Click=@(() => Show())></RadzenButton>
+
+                </div>
+                <div class="guestbook-row">
+                    <RadzenCard id="animation-from-top" class="card new-guestbook light-green">
+                        <div class="guestbook-column">
+                            <div class="guestbook-row justify-center padd8 min768-col min768-text-center">
+                                <p class="text-dark-green">Psst... The guestbook supports HTML. </p>
+                            </div>
+                            <RadzenHtmlEditor @bind-Value=NewContent.HtmlContent class="guestbook-editor">
+                                <RadzenHtmlEditorUndo />
+                                <RadzenHtmlEditorRedo />
+                                <div class="min768-none">
+                                    <RadzenHtmlEditorSeparator />
+                                </div>
+                                <RadzenHtmlEditorBold />
+                                <RadzenHtmlEditorItalic />
+                                <RadzenHtmlEditorUnderline />
+                                <div class="min768-none">
+                                    <RadzenHtmlEditorStrikeThrough />
+                                </div>
+
+                                <div class="min768-none">
+                                    <RadzenHtmlEditorSeparator />
+                                </div>
+                                <RadzenHtmlEditorColor />
+                                <div class="min768-none">
+                                    <RadzenHtmlEditorRemoveFormat />
+                                </div>
+
+                            </RadzenHtmlEditor>
+                            <br>
+                            <div class="guestbook-row min768-col">
+                                <RadzenTextBox type="input" @bind-Value=NewContent.Name Placeholder="Enter your name" />
+                                @if (!PostSuccess)
+                                {
+                                    <p class="text-dark-green">No spamming allowed! You have already posted recently.</p>
+                                }
+                                <RadzenButton type="button" Click=@(() => PostGuestbookContent())
+                                class="new-button min768-margin8" Text="Send it"></RadzenButton>
+
+
+                            </div>
+
+                        </div>
+                    </RadzenCard>
+
+                </div>
+            }
+
+
+        </div>
+        <br>
+        <div class="guestbook">
+            <RadzenCard class="card light-green text-dark-green">
+                @foreach (GuestbookContent content in GuestbookContents.Where(b => b.Approved).OrderByDescending(d => d.DateAdded))
+                {
+                    <div>
+                        @((MarkupString)content.HtmlContent)
+                    </div>
+                    <br>
+                    <div class="guestbook-row">
+                        <p>Written by: @content.Name</p>
+                        <p>@content.DateAdded.ToShortDateString()</p>
+                    </div>
+                    <hr>
+                }
+            </RadzenCard>
+        </div>
+    </ChildContent>
+</RadzenContent>

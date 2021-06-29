@@ -1,0 +1,87 @@
+@page "/webadmin"
+@inherits My.Web.Pages.WebAdministrationComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using System.Net
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading class="text-dark-green" Size="H1" Text="Admin">
+    </RadzenHeading>
+    <RadzenTabs>
+      <Tabs>
+          <RadzenTabsItem Text="Guestbook">
+            <ChildContent>
+              <RadzenCard class="card green">
+                <ChildContent>
+                  @foreach (GuestbookContent item in GuestbookContents)
+                  {
+                      <RadzenCard class="card light-green">
+                          <div class="admin-row min768-col">
+                              <p class="text-dark-green">Id: @item.Id</p>
+                              <p class="text-dark-green">Added at: @item.DateAdded</p>
+                              <div class="admin-row">
+                                <p class="text-dark-green">Name: </p>
+                                <RadzenTextBox @bind-Value=@item.Name />
+                              </div>
+                              <div class="admin-row">
+                                <p class="text-dark-green">Approved: </p>
+                                <RadzenCheckBox @bind-Value=@item.Approved  TValue="bool" />
+                              </div>
+                          </div>
+                          <div class="admin-row padd-top-bot">
+                              <RadzenTextArea class="admin-area" Rows="3" @bind-Value=@item.HtmlContent />
+                          </div>
+                      </RadzenCard>
+                  }
+                   <RadzenButton type="button" Click=@(() => UpdateGuestbook()) class="update-button min768-margin8" Text="Update Guestbook"></RadzenButton>
+                </ChildContent>
+              </RadzenCard>
+            </ChildContent>
+          </RadzenTabsItem>
+          <RadzenTabsItem Text="Blog">
+            <ChildContent>
+              <RadzenCard class="card green">
+                <ChildContent>
+                  @foreach (BlogContent item in BlogContents)
+                  {
+                      <RadzenCard class="card light-green">
+                        <div class="admin-row min768-col">
+                              <p class="text-dark-green">Id: @item.Id</p>
+                              <p class="text-dark-green">Added at: @item.DateAdded</p>
+                              <div class="admin-row">
+                                <p class="text-dark-green">Title: </p>
+                                <RadzenTextBox @bind-Value=@item.Title />
+                              </div>
+                              <p class="text-dark-green">Likes: @item.Likes</p>
+                          </div>
+                          <div class="admin-row padd-top-bot">
+                              <RadzenTextArea class="admin-area" Rows="15" @bind-Value=@item.Content />
+                          </div>
+                      </RadzenCard>
+                  }
+                  <RadzenButton type="button" Click=@(() => UpdateBlog()) class="update-button min768-margin8" Text="Update Blog"></RadzenButton>
+                  
+                </ChildContent>
+              </RadzenCard>
+              <RadzenCard class="card green">
+                <RadzenCard class="card light-green">
+                    <RadzenHtmlEditor @bind-Value=@NewBlogContent.Content class="guestbook-editor min768-height">
+                    </RadzenHtmlEditor>
+                    <div class="admin-row padd-top-bot">
+                      <div class="admin-row">
+                        <p class="text-dark-green">Title: </p>
+                        <div>
+                          <RadzenTextBox Name="BlogTitle" @bind-Value=@NewBlogContent.Title />
+                        </div>
+                      </div>
+                      <RadzenButton type="button" Click=@(() => PostBlogContent()) class="new-button min768-margin8" Text="Publish new BlogPost"></RadzenButton>
+                    </div>
+                  </RadzenCard>
+              </RadzenCard>
+            </ChildContent>
+          </RadzenTabsItem>
+      </Tabs>
+    </RadzenTabs>
+  </ChildContent>
+</RadzenContent>

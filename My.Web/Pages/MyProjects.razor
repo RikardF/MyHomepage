@@ -1,0 +1,84 @@
+﻿@page "/my-projects"
+@inherits My.Web.Pages.MyProjectsComponent
+
+@using Radzen
+@using Radzen.Blazor
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading class="text-dark-green" Size="H1" Text="My projects">
+    </RadzenHeading>
+    <RadzenTabs>
+      <Tabs>
+        @foreach (var repo in repos.OrderByDescending(d => d.CreatedAt))
+
+
+
+        {
+          <RadzenTabsItem Text=@repo.Name>
+            <ChildContent>
+              <RadzenCard class="card green no-padd-left min999-padd">
+                <ChildContent>
+                  <div class="proj">
+                    <div class="proj-col padd16 no-padd-left min768-none">
+                      <RadzenTree Name="Tree">
+                        <RadzenTreeItem Text="Links">
+                          <RadzenLink Path="@repo.HtmlUrl" Text="Visit Github" target="_blank" />
+                        </RadzenTreeItem>
+                        <RadzenTreeItem Text="Languages">
+                          @foreach (var language in repo.Languages)
+
+
+
+                          {
+                            <p class="text-bold">
+                              @language.Key
+                            </p>
+                            <RadzenProgressBar Value="@language.Value" ShowValue="false"
+                          Max="@repo.Languages.Sum(s => s.Value)" />
+
+
+
+                          }
+                        </RadzenTreeItem>
+                      </RadzenTree>
+                    </div>
+                    <div class="proj evenly min999-col">
+                      <div class="proj-col padd16 img min999-width">
+                        <RadzenCard class="card full-width light-green" Name="Description">
+                          <div class="text-dark-green">
+                            @repo.Description
+                          </div>
+                        </RadzenCard>
+                      </div>
+                      <div class="proj-col padd8">
+                        <div class="text-white padd-top-bot">
+                          Contributors:
+                        </div>
+                        <div class="proj start">
+                          @foreach (var contributor in repo.Contributors)
+
+                          {
+                            <RadzenImage Path="@contributor.AvatarUrl" class="git-avatar-small" title="@contributor.Login">
+                            </RadzenImage>
+
+                          }
+                        </div>
+                        <div class="proj padd-top-bot">
+                          <RadzenImage Path="@GetImagePath(repo.Name)" title="@repo.Name" class="img min999-width">
+                          </RadzenImage>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ChildContent>
+              </RadzenCard>
+            </ChildContent>
+          </RadzenTabsItem>
+
+
+
+        }
+      </Tabs>
+    </RadzenTabs>
+  </ChildContent>
+</RadzenContent>
