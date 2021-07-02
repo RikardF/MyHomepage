@@ -95,5 +95,6 @@ namespace My.Web.Pages
             NewBlogContent = new BlogContent();
             await OnInitializedAsync();
         }
+
     }
 }

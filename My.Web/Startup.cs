@@ -25,6 +25,8 @@ namespace My.Web
 {
     public class Startup
     {
+        public UserRoleService userRoleService = new UserRoleService();
+        private string _environmentIP { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -56,9 +58,8 @@ namespace My.Web
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDirectoryBrowser();
-
-            UserRoleService userRoleService = new UserRoleService {AdminIP = Configuration.GetValue<string>("GlobalSettings:DevAdminIP")};
             services.AddSingleton(userRoleService);
+            services.AddScoped<ILikeService, LikeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,14 +74,22 @@ namespace My.Web
             app.UseResponseCompression();
             if (env.IsDevelopment())
             {
+                _environmentIP = "DevAdminIP";
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                _environmentIP = "AdminIP";
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.Use(async (context, next) => 
+            {
+                userRoleService.AdminIP = Configuration.GetValue<string>($"GlobalSettings:{_environmentIP}");
+                await next();
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

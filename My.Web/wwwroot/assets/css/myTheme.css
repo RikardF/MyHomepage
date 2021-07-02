@@ -70,7 +70,7 @@ a:hover {
   flex-wrap: wrap;
   width: 100%;
 }
-.blog-title-row {
+.blog-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -147,6 +147,12 @@ a:hover {
 .justify-center {
   justify-content: center;
 }
+.justify-end {
+  justify-content: flex-end;
+}
+.align-center {
+  align-items: center;
+}
 
 .text-bold {
   font-weight: bold;
@@ -162,6 +168,23 @@ a:hover {
   overflow-y: hidden;
   animation: slidein-from-top;
   animation-duration: 500ms;
+}
+
+.like-button {
+  background-color: transparent !important;
+  border: 0;
+  font-weight: 400;
+  font-size:xx-large;
+}
+.like-button:hover {
+  background-color: transparent !important;
+  border: 0;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-weight: 700;
+}
+.like-button.rz-button.rz-state-disabled:hover {
+  font-weight: 400;
 }
 
 .new-button {

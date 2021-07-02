@@ -15,16 +15,22 @@ namespace My.Web.Pages
 {
     public partial class BlogComponent : ComponentBase
     {
+        [CascadingParameter]
+        private ConnectionParams connectionParams { get; set; }
         [Inject]
         private IBlogService _blogService { get; set; }
         [Inject]
         private IDecoderEncoderService _decoderEncoderService { get; set; }
+        [Inject]
+        private ILikeService _likeService { get; set; }
+        protected List<BlogLike> Likes;
         protected List<BlogContent> BlogContents = new List<BlogContent>();
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
+            Likes = await _likeService.GetBlogLikes();
             await LoadBlog();
         }
 
@@ -35,6 +41,7 @@ namespace My.Web.Pages
             {
                 item.Content = _decoderEncoderService.HTMLDecode(item.Content);
                 item.Title = _decoderEncoderService.Decode(item.Title);
+                item.Likes = Likes.Where(l => l.BlogContentId == item.Id).Count();
             }
         }
         public void Reload()
@@ -44,6 +51,21 @@ namespace My.Web.Pages
 
         public void OnPropertyChanged(PropertyChangedEventArgs args)
         {
+        }
+
+        protected bool LikeButtonState(string Id)
+        {
+            if (Likes.Where(i => i.BlogContentId == Id).Count() > 0) return true;
+            else return false;
+        }
+
+        protected async Task LikeContent(string id)
+        {
+            await _likeService.AddBlogLike(new BlogLike {
+                UserIP = connectionParams.ConnectionIP,
+                BlogContentId = id
+            });
+            await OnInitializedAsync();
         }
     }
 }

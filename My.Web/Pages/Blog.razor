@@ -12,7 +12,7 @@
         @foreach (BlogContent blogContent in BlogContents.OrderByDescending(d => d.DateAdded))
         {
           <RadzenCard class="card light-green">
-            <div class="blog-title-row">
+            <div class="blog-row">
               <RadzenHeading class="text-dark-green" Size="H2" Text=@blogContent.Title>
               </RadzenHeading>
               <p class="text-dark-green">@blogContent.DateAdded</p>
@@ -20,6 +20,10 @@
             <hr>
             <div class="text-dark-green">
               @((MarkupString)blogContent.Content)
+            </div>
+            <div class="blog-row justify-end align-center padd8">
+              <RadzenButton Click=@(() => LikeContent(blogContent.Id)) class="far fa-thumbs-up like-button" Disabled=@LikeButtonState(blogContent.Id) />
+              <p class="text-dark-green">@blogContent.Likes</p>
             </div>
           </RadzenCard>
           <br>
